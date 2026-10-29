@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SkillSync – Resume Analysis & Career Matching</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Sidebar (becomes a top bar on small screens) -->
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">S</span>SkillSync</div>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#dashboard" data-target="dashboard" class="active"><span class="ico">🏠</span>Dashboard</a>
+      <a href="#analysis" data-target="analysis"><span class="ico">📄</span>Resume Analysis</a>
+      <a href="#matches" data-target="matches"><span class="ico">🎯</span>Job Matches</a>
+      <a href="#roadmap" data-target="roadmap"><span class="ico">🧭</span>Career Roadmap</a>
+    </nav>
+    <p class="demo-note">UI prototype. All results are predefined sample data.</p>
+  </aside>
+
+  <main class="content">
+    <!-- Dashboard: welcome, upload, summary -->
+    <section id="dashboard" class="section">
+      <header class="welcome">
+        <h1>Welcome to SkillSync</h1>
+        <p>SkillSync is a college mini-project that turns a resume into a skill profile, suggests matching roles and maps a learning path. This version is a front-end demo: it does not read your file or use AI.</p>
+      </header>
+
+      <div class="card upload-card">
+        <h2>Upload your resume</h2>
+        <label id="drop-zone" class="drop-zone" for="file-input" tabindex="0">
+          <span class="drop-icon">⬆</span>
+          <strong>Drag and drop your resume here</strong>
+          <span class="muted">or click to choose a PDF or DOCX file (max 5 MB)</span>
+        </label>
+        <input id="file-input" type="file" accept=".pdf,.docx" hidden>
+        <div id="file-chip" class="file-chip" hidden>
+          <span>📎 <span id="file-name"></span></span>
+          <button type="button" id="remove-file" class="link-btn">Remove</button>
+        </div>
+        <p id="message" class="message" role="status" aria-live="polite" hidden></p>
+        <div class="actions">
+          <button type="button" id="analyse-btn" class="btn primary" disabled>
+            <span id="spinner" class="spinner" hidden></span><span id="analyse-label">Analyse Resume</span>
+          </button>
+          <button type="button" id="reset-btn" class="btn ghost">Reset demo</button>
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <div class="card stat"><span class="stat-ico blue">🧩</span><div><div class="stat-value" id="stat-skills">–</div><div class="muted">Skills identified</div></div></div>
+        <div class="card stat"><span class="stat-ico purple">🎯</span><div><div class="stat-value" id="stat-jobs">–</div><div class="muted">Job matches</div></div></div>
+        <div class="card stat"><span class="stat-ico amber">📉</span><div><div class="stat-value" id="stat-gaps">–</div><div class="muted">Skill gaps</div></div></div>
+      </div>
+    </section>
+
+    <!-- Results appear only after "Analyse Resume" -->
+    <div id="results" hidden>
+      <section id="analysis" class="section">
+        <div class="section-head"><h2>Resume analysis</h2><span class="badge">Sample analysis</span></div>
+        <div class="card">
+          <div class="profile">
+            <div class="avatar" id="profile-avatar"></div>
+            <div><h3 id="profile-name"></h3><p class="muted" id="profile-title"></p></div>
+          </div>
+          <p class="notice">This is a predefined sample profile. Your uploaded file was not read or analysed.</p>
+          <h4>Extracted skills</h4>
+          <div id="skill-tags" class="tags"></div>
+          <div class="two-col">
+            <div><h4>Education</h4><ul id="education-list" class="plain-list"></ul></div>
+            <div><h4>Experience</h4><ul id="experience-list" class="plain-list"></ul></div>
+          </div>
+          <h4>Projects</h4>
+          <ul id="project-list" class="plain-list"></ul>
+        </div>
+      </section>
+
+      <section id="matches" class="section">
+        <div class="section-head"><h2>Job matches</h2><span class="badge">Illustrative demo scores</span></div>
+        <div id="job-grid" class="job-grid"></div>
+      </section>
+
+      <section id="gaps" class="section">
+        <div class="section-head"><h2>Skill gap analysis</h2><span class="badge">Sample data</span></div>
+        <div class="two-col">
+          <div class="card"><h3>Skills you have</h3><div id="have-tags" class="tags"></div></div>
+          <div class="card"><h3>Skills to develop</h3><div id="need-tags" class="tags"></div></div>
+        </div>
+      </section>
+
+      <section id="roadmap" class="section">
+        <div class="section-head"><h2>Career roadmap</h2><span class="badge">Sample suggestions</span></div>
+        <div id="roadmap-grid" class="roadmap-grid"></div>
+      </section>
+    </div>
+
+    <p id="empty-hint" class="muted empty-hint">Upload a resume and choose Analyse Resume to see the sample analysis, job matches, skill gaps and roadmap.</p>
+    <footer class="footer muted">SkillSync demo. No data leaves your browser and no AI model is used.</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
